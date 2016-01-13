@@ -1,8 +1,15 @@
 # Screenset Validation
 Gigya SDK extension for advanced validation with custom error messages for Gigya screensets.
 
+### How to enable
+To enable the new ````validation```` parameter, include the following JavaScript file on your page after Gigya's SDK. I recommend using the validation parameter in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag).
+
+````js
+<script type="text/javascript" src="//d1ubmrxmgxxi5o.cloudfront.net/screenset-validation.min.js"></script>
+````
+
 ### Demo site
-[http://gigya.github.io/screenset-validation](gigya.github.io/screenset-validation)
+[gigya.github.io/screenset-validation](http://gigya.github.io/screenset-validation)
 
 Testing instructions:
 
@@ -62,5 +69,5 @@ window.__gigyaConf = {
 };
 </script>
 <script type="text/javascript" src="http://cdn.gigya.com/JS/gigya.js?apiKey=3_56CgIuwIjbF03nCwBUkuXzAOlYBkzfiH6PDqavQEESvOk-zxB2tr2xAP2YgDg6Ih"></script>
-<script type="text/javascript" src="screenset-validation.js"></script>
+<script type="text/javascript" src="//d1ubmrxmgxxi5o.cloudfront.net/screenset-validation.min.js"></script>
 ````
