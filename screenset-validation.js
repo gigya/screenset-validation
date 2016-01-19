@@ -27,7 +27,7 @@ function err() {
 var lastResponse = {};
 function userValidate(validateFunc, formData, eventType, callback) {
   // Check to see if we know the answer.
-  var formDataStr = JSON.stringify(formData);
+  var formDataStr = JSON.stringify(formData) + eventType;
   if(lastResponse.formDataStr === formDataStr) {
     if(lastResponse.errors) {
       callback(lastResponse.errors);
