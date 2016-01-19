@@ -228,7 +228,7 @@ function patchSDK() {
 };
 
 // Append custom CSS to page.
-var css = '.gigya-form-error-msg.gigya-error-msg-active { margin-top: 25px !important; }';
+var css = '.gigya-form-error-msg.gigya-error-msg-active { margin-top: 25px !important; } .gigya-composite-control-submit { padding-bottom: 0 !important; }';
 var head = document.head || document.getElementsByTagName('head')[0];
 var style = document.createElement('style');
 style.type = 'text/css';
