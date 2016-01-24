@@ -69,5 +69,5 @@ window.__gigyaConf = {
 };
 </script>
 <script type="text/javascript" src="http://cdn.gigya.com/JS/gigya.js?apiKey=3_56CgIuwIjbF03nCwBUkuXzAOlYBkzfiH6PDqavQEESvOk-zxB2tr2xAP2YgDg6Ih"></script>
-<script type="text/javascript" src="//d1ubmrxmgxxi5o.cloudfront.net/screenset-validation.min.js"></script>
+<script type="text/javascript" src="//cdn.gigya-ext.com/screenset-validation.min.js"></script>
 ````
