@@ -91,7 +91,7 @@ gigya.accounts.showScreenSet = function() {
     var params = gigya.utils.object.merge([gigya.thisScript.globalConf, arguments]);
     if(params.customLang) {
       for(var key in params.customLang) {
-        gigya.i18n['gigya.services.accounts.plugins.screenSet.js']['en'][key] = params.customLang[key];
+        gigya.i18n['gigya.services.accounts.plugins.screenSet.js'][gigya.thisScript.lang.langCode][key] = params.customLang[key];
       }
     }
   } catch(e) {
