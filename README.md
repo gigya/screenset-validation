@@ -2,10 +2,10 @@
 Gigya SDK extension for advanced validation with custom error messages for Gigya screensets.
 
 ### How to enable
-To enable the new ````validation```` parameter, include the following JavaScript file on your page after Gigya's SDK. I recommend using the validation parameter in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag).
+To enable the new ````validation```` and ````customLang```` parameters, include the following JavaScript file on your page after Gigya's SDK. I recommend using the parameters in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag for global functions).
 
 ````js
-<script type="text/javascript" src="//d1ubmrxmgxxi5o.cloudfront.net/screenset-validation.min.js"></script>
+<script type="text/javascript" src="//cdn.gigya-ext.com/screenset-validation.min.js"></script>
 ````
 
 ### Demo site
@@ -16,11 +16,18 @@ Testing instructions:
 1. You cannot enter an email with any lowercase characters.
 2. Your first name must start with a capital letter.
 3. The subscribe checkbox is mandatory.
+4. Entering email "HELLO@HELLO.COM" will show a custom error message.
 
 ### Example implementation
 ````js
 <script type="text/javascript">
 window.__gigyaConf = {
+  // Get full list of customLang keys with:
+  // console.log(gigya.i18n['gigya.services.accounts.plugins.screenSet.js']['en']);
+  customLang: {
+    email_already_exists: 'You already have an account'
+  },
+
   validation: {
     // formData contains all information user has entered
     // eventType is either "change" or "keypress"
