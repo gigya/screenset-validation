@@ -2,7 +2,7 @@
 Gigya SDK extension for advanced validation with custom error messages for Gigya screensets.
 
 ### How to enable
-To enable the new ````validation```` and ````customLang```` parameters, include the following JavaScript file on your page after Gigya's SDK. I recommend using the parameters in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag for global functions).
+To enable the ````validation```` and ````customLang```` parameters, include the following JavaScript file on your page after Gigya's SDK. I recommend using the parameters in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag for global functions).
 
 ````js
 <script type="text/javascript" src="//cdn.gigya-ext.com/screenset-validation.min.js"></script>
