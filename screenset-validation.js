@@ -84,6 +84,22 @@ gigya._.plugins.setPluginInstance = function(params, plugin) {
   return setPluginInstance.apply(this, arguments);
 };
 
+// Patch showScreenSet method with customLang.
+var showScreenSet = gigya.accounts.showScreenSet;
+gigya.accounts.showScreenSet = function() {
+  try {
+    var params = gigya.utils.object.merge([gigya.thisScript.globalConf, arguments]);
+    if(params.customLang) {
+      for(var key in params.customLang)
+        gigya.i18n['gigya.services.accounts.plugins.screenSet.js']['en'][key] = params.customLang[key];
+      }
+    }
+  } catch(e) {
+    err('Could not use custom i18n', e);
+  }
+  showScreenSet.apply(this, arguments);
+};
+
 // Patch SDK with new functionality.
 function patchSDK() {
   // For CONSTANT (var) reference.
