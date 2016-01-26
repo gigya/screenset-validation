@@ -1,5 +1,5 @@
 # Screenset Validation
-Gigya SDK extension for advanced validation and custom error messages for Gigya screensets.
+Gigya SDK extension for advanced validation and custom error messages for Gigya screensets. Actively maintained and loaded from CDN to ensure compatibility with Gigya SDK until released in core SDK.
 
 ### What it does
 1. Adds ````validation```` parameter that lets you add custom form validation. Supports both local and remote validation.
