@@ -1,5 +1,14 @@
 # Screenset Validation
-Gigya SDK extension for advanced validation with custom error messages for Gigya screensets.
+Gigya SDK extension for advanced validation and custom error messages for Gigya screensets.
+
+### What it does
+1. Adds ````validation```` parameter that lets you add custom form validation. Supports both local and remote validation.
+2. Allows override of default error messages via "customLang" parameter.
+
+Use-cases:
+- Custom error messages.
+- Use local logic for custom validation eg force email to be all uppercase.
+- Use remote logic for custom validation eg ensure user's rewards card number exists in your system.
 
 ### How to enable
 To enable the ````validation```` and ````customLang```` parameters, include the following JavaScript file on your page after Gigya's SDK. I recommend using the parameters in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag for global functions).
