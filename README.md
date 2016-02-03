@@ -83,6 +83,11 @@ window.__gigyaConf = {
         errors['data.subscribe'] = true;
       }
 
+     // Ensure terms isn't "no".
+      if(formData['data.terms'] !== 'Yes') {
+        errors['_form'] = 'Must provide terms';
+      }
+
       // You can return errors OR use callback for validation via AJAX.
       return errors;
     },
