@@ -11,6 +11,17 @@
         email_already_exists: 'You already have an account'
       },
 
+      // Allows transformation of params before submission to API.
+      // This is used when you need to display data in a different format than what the API expects.
+      // For example, radio button have string values but you may need to save them in the database as boolean.
+      transformBeforeSubmit: {
+        'gigya-register-screen': function(params) {
+          // We forced the user to enter an uppercase email, but now we're bringing it back down to lowercase.
+          params.email = params.email.toLowerCase();
+        }
+      },
+
+      // Validate each screen.
       validation: {
         // formData contains all information user has entered
         // eventType is either "change" or "keypress"

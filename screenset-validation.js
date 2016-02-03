@@ -123,33 +123,20 @@ function patchSDK() {
     var screenID = _this._parent.ID;
 
     // We're not interested unless the validation param was passed for this screen.
-    if(typeof params.validation !== 'object' || !params.validation[screenID]) {
+    if(!params.validation || typeof params.validation !== 'object' || !params.validation[screenID]) {
       return validate.apply(_this, args);
     }
 
-    // Create dimmer.
-    // Be wary about relying on undocumented APIs - if it's not available, work regardless.
-    var dimmer;
-    try{
-      dimmer = new gigya._.plugins.LoadDimmer(this.instanceElement);
-    } catch(e) {}
-    if(!dimmer || !dimmer.show || !dimmer.hide) {
-      dimmer = { show: function() {}, hide: function() {} };
-      if(typeof console === 'object' && console.error) {
-        console.error('Error initializing screen set validation dimmer.');
-      }
-    }
-
     // Activate dimmer.
-    dimmer.show();
+    _this._screen.dimScreen();
 
     // Create form data and pass to custom validation function.
     userValidate(params.validation[screenID], _this.getFlatFormData(false, true), 'submit', function(errors) {
       // Hide dimmer.
-      dimmer.hide();
+      _this._screen.undimScreen();
 
       // Check if no errors were returned (in which case we do nothing).
-      if(typeof errors !== 'object' || Object.keys(errors).length === 0) {
+      if(!errors || typeof errors !== 'object' || Object.keys(errors).length === 0) {
         return validate.apply(_this, args);
       }
 
@@ -200,7 +187,7 @@ function patchSDK() {
     var screenID = _this._parent.ID;
 
     // We're not interested unless the validation param was passed for this screen.
-    if(typeof params.validation !== 'object' || !params.validation[screenID]) {
+    if(!params.validation || typeof params.validation !== 'object' || !params.validation[screenID]) {
       return onInputChange.apply(_this, args);
     }
 
@@ -225,6 +212,27 @@ function patchSDK() {
       }
     });
   }
+
+  // Allow transformation of params before submission to API.
+  var getParamsForFormData = BaseForm.prototype.getParamsForFormData;
+  BaseForm.prototype.getParamsForFormData = function(formData) {
+    // Get params passed to showScreenSet.
+    var params = this._screenSet.params;
+
+    // Get screen ID.
+    var screenID = this._parent.ID;
+
+    // Get params.
+    var ret = getParamsForFormData.apply(this, arguments);
+
+    // Don't proceed if nothing to do.
+    if(!params.transformBeforeSubmit || typeof params.transformBeforeSubmit !== 'object' || !params.transformBeforeSubmit[screenID]) {
+      return ret;
+    }
+
+    // Return transformed params.
+    return params.transformBeforeSubmit[screenID](ret) || ret;
+  };
 };
 
 // Append custom CSS to page.
