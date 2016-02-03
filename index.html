@@ -16,8 +16,12 @@
       // For example, radio button have string values but you may need to save them in the database as boolean.
       transformBeforeSubmit: {
         'gigya-register-screen': function(params) {
-          // We forced the user to enter an uppercase email, but now we're bringing it back down to lowercase.
-          params.email = params.email.toLowerCase();
+          // Convert radio options to boolean
+          var map = {
+            'Yes': true,
+            'No': false
+          };
+          params.data.terms = map[params.data.terms];
         }
       },
 
@@ -51,6 +55,11 @@
             errors['data.subscribe'] = true;
           }
 
+          // Ensure terms isn't "no".
+          if(formData['data.terms'] !== 'Yes') {
+            errors['data.terms'] = 'Must provide terms';
+          }
+
           // You can return errors OR use callback for validation via AJAX.
           return errors;
         },
@@ -70,7 +79,7 @@
     };
     </script>
     <script type="text/javascript" src="http://cdn.gigya.com/JS/gigya.js?apiKey=3_56CgIuwIjbF03nCwBUkuXzAOlYBkzfiH6PDqavQEESvOk-zxB2tr2xAP2YgDg6Ih"></script>
-    <script type="text/javascript" src="//cdn.gigya-ext.com/screenset-validation.min.js"></script>
+    <script type="text/javascript" src="screenset-validation.js"></script>
 
     <script type="text/javascript">
     gigya.accounts.showScreenSet({

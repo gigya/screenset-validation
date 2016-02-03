@@ -206,6 +206,9 @@ function patchSDK() {
 
         // Show error in error display element.
         var errorDisplay = _this._errorDisplayElements[key] && _this._errorDisplayElements[key][0];
+        if(key === 'data.terms' && !errorDisplay && _this._errorDisplayElements['null']) {
+          errorDisplay = _this._errorDisplayElements['null'][0];
+        }
         if(errorDisplay && typeof errors[key] === 'string') {
           errorDisplay.showError({ errorCode: 400027, errorMessage: errors[key] });
         }

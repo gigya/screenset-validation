@@ -44,8 +44,12 @@ window.__gigyaConf = {
   // For example, radio button have string values but you may need to save them in the database as boolean.
   transformBeforeSubmit: {
     'gigya-register-screen': function(params) {
-      // We forced the user to enter an uppercase email, but now we're bringing it back down to lowercase.
-      params.email = params.email.toLowerCase();
+      // Convert radio options to boolean
+      var map = {
+        'Yes': true,
+        'No': false
+      };
+      params.data.terms = map[params.data.terms];
     }
   },
 
