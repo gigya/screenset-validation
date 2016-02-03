@@ -84,22 +84,6 @@ gigya._.plugins.setPluginInstance = function(params, plugin) {
   return setPluginInstance.apply(this, arguments);
 };
 
-// Patch showScreenSet method with customLang.
-var showScreenSet = gigya.accounts.showScreenSet;
-gigya.accounts.showScreenSet = function() {
-  try {
-    var params = gigya.utils.object.merge([gigya.thisScript.globalConf, arguments]);
-    if(params.customLang) {
-      for(var key in params.customLang) {
-        gigya.i18n['gigya.services.accounts.plugins.screenSet.js'][gigya.thisScript.lang.langCode][key] = params.customLang[key];
-      }
-    }
-  } catch(e) {
-    err('Could not use custom i18n', e);
-  }
-  showScreenSet.apply(this, arguments);
-};
-
 // Patch SDK with new functionality.
 function patchSDK() {
   // For CONSTANT (var) reference.
@@ -121,12 +105,12 @@ function patchSDK() {
     }
   };
 
+  var BaseForm = gigya._.plugins.ScreenSet.BaseForm;
+
   // Typically, validate ensures all Gigya requirements are met.
   // Then onBeforeSubmit is called to fulfill all other requirements.
   // Finally, the actual API call to Gigya provides a 3rd verification.
   // Hooking in here allows us to merge step 1 and 2 into a single step which is a cleaner UX.
-  var BaseForm = gigya._.plugins.ScreenSet.BaseForm;
-
   var validate = BaseForm.prototype.validate;
   BaseForm.prototype.validate = function(callback) {
     var _this = this;
