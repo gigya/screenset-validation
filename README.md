@@ -3,14 +3,12 @@ Gigya SDK extension for advanced validation and custom error messages with Gigya
 
 ### What it does
 1. Adds ````validation```` parameter that lets you add custom form validation. Supports both local and remote validation.
-2. Adds ````transformBeforeSubmit```` parameter that lets you touch params before submission to API.
-3. Demonstrates built-in ````customLang```` parameter.
+2. Demonstrates built-in ````customLang```` parameter.
 
 Use-cases:
 - Custom error messages.
 - Use local logic for custom validation eg force email to be all uppercase.
 - Use remote logic for custom validation eg ensure user's rewards card number exists in your system.
-- Display options in a different format than what the API expects eg radio button have string values but you may need to save them in the database as boolean.
 
 ### How to enable
 To enable the parameters, include the following JavaScript file on your page after Gigya's SDK. I recommend using the parameters in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag for global functions).
@@ -37,20 +35,6 @@ window.__gigyaConf = {
   // console.log(gigya.i18n['gigya.services.accounts.plugins.screenSet.js']['en']);
   customLang: {
     email_already_exists: 'You already have an account'
-  },
-
-  // Allows transformation of params before submission to API.
-  // This is used when you need to display options in a different format than what the API expects.
-  // For example, radio button have string values but you may need to save them in the database as boolean.
-  transformBeforeSubmit: {
-    'gigya-register-screen': function(params) {
-      // Convert radio options to boolean
-      var map = {
-        'Yes': true,
-        'No': false
-      };
-      params.data.terms = map[params.data.terms];
-    }
   },
 
   // Validate each screen.
@@ -81,11 +65,6 @@ window.__gigyaConf = {
       if(!formData['data.subscribe']) {
         // Checkboxes don't have error messages.
         errors['data.subscribe'] = true;
-      }
-
-     // Ensure terms isn't "no".
-      if(formData['data.terms'] !== 'Yes') {
-        errors['_form'] = 'Must provide terms';
       }
 
       // You can return errors OR use callback for validation via AJAX.

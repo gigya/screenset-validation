@@ -215,27 +215,6 @@ function patchSDK() {
       }
     });
   }
-
-  // Allow transformation of params before submission to API.
-  var getParamsForFormData = BaseForm.prototype.getParamsForFormData;
-  BaseForm.prototype.getParamsForFormData = function(formData) {
-    // Get params passed to showScreenSet.
-    var params = this._screenSet.params;
-
-    // Get screen ID.
-    var screenID = this._parent.ID;
-
-    // Get params.
-    var ret = getParamsForFormData.apply(this, arguments);
-
-    // Don't proceed if nothing to do.
-    if(!params.transformBeforeSubmit || typeof params.transformBeforeSubmit !== 'object' || !params.transformBeforeSubmit[screenID]) {
-      return ret;
-    }
-
-    // Return transformed params.
-    return params.transformBeforeSubmit[screenID](ret) || ret;
-  };
 };
 
 // Append custom CSS to page.
