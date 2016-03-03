@@ -11,7 +11,7 @@ Use-cases:
 - Use remote logic for custom validation eg ensure user's rewards card number exists in your system.
 
 ### How to enable
-To enable the parameters, include the following JavaScript file on your page after Gigya's SDK. I recommend using the parameters in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` not script tag for global functions - be sure to define this BEFORE include of gigya.js).
+To enable the parameters, include the following JavaScript file on your page after Gigya's SDK. I recommend using the parameters in your global configuration instead of individual ````showScreenSet```` calls (you must use ````window.__gigyaConf```` for functions in global configuration and ````window.__gigyaConf```` must be defined before gigya.js is included).
 
 ````js
 <script type="text/javascript" src="//cdn.gigya-ext.com/screenset-validation.min.js"></script>
@@ -31,7 +31,7 @@ Testing instructions:
 ````js
 <script type="text/javascript">
 
-/* NOTE:  window.__gigyaConf property should be define BEFORE include of gigya.js */
+// IMPORTANT: window.__gigyaConf property must be defined BEFORE gigya.js is included
 window.__gigyaConf = {
   // Get full list of customLang keys with:
   // console.log(gigya.i18n['gigya.services.accounts.plugins.screenSet.js']['en']);
