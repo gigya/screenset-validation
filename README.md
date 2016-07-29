@@ -42,7 +42,7 @@ window.__gigyaConf = {
   // Validate each screen.
   validation: {
     // formData contains all information user has entered
-    // eventType is either "change" or "keypress"
+    // eventType is either "change" or "submit"
     // callback is optional, you can use it for asynchronous validation or just use return
 
     'gigya-register-screen': function(formData, eventType, callback) {
