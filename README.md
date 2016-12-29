@@ -25,7 +25,6 @@ Testing instructions:
 1. You cannot enter an email with any lowercase characters.
 2. Your first name must start with a capital letter.
 3. The subscribe checkbox is mandatory.
-4. Entering email "HELLO@HELLO.COM" will show a custom error message.
 
 ### Example implementation
 ````js
