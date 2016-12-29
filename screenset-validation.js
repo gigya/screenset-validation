@@ -91,9 +91,11 @@ function patchSDK() {
 
   // Enable error handling on all checkboxes.
   var TermsInput = gigya._.plugins.ScreenSet.TermsInput;
-  TermsInput.FORM_TYPE_CRITERIA = function(context) {
-    return context.type === 'checkbox';
-  };
+  if (TermsInput) {
+    TermsInput.FORM_TYPE_CRITERIA = function(context) {
+      return context.type === 'checkbox';
+    };
+  }
 
   // Don't try to determine if login ID is available when there is a validation error.
   // Don't override error when login ID is available.
